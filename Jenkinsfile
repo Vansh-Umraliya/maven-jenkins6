@@ -10,8 +10,10 @@ pipeline {
         stage('create-docker-image') {
             steps {
                 sh '''
-                docker build -t webapp .
-                docker run -d -p 8081:8080 webapp
+                docker build -t  vansh741/javawebapp:${BUILD_NUMBER} .
+                docker tag vansh741/javawebapp:${BUILD_NUMBER} vansh741/javawebapp:latest
+                docker push vansh741/javawebapp:${BUILD_NUMBER}
+                docker push vansh741/javawebapp:latest
                 '''
             }
         }
